@@ -32,7 +32,8 @@ NSString * const LOG_DATETIME_FORMMAT = @"yyyy-MM-dd hh:mm:ss";
 + (void)dump {
     [self systemInfo];
     
-    NSLog(@"\t%ld\t%ld",
+    NSLog(@"%s\t%ld\t%ld",
+          __func__,
           sysInfo.cpuUsage,
           sysInfo.memoryUsage / 1024);
 }
