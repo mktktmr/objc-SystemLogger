@@ -23,6 +23,8 @@ static struct system_info sysInfo;
 static NSInteger preUserTime;
 static NSInteger preSystemTime;
 
+static BOOL hasHeader = NO;
+
 const NSInteger SYSTEM_MONITER_INTERVAL = 1;
 
 NSString * const LOG_DATETIME_FORMMAT = @"yyyy-MM-dd hh:mm:ss";
@@ -32,7 +34,13 @@ NSString * const LOG_DATETIME_FORMMAT = @"yyyy-MM-dd hh:mm:ss";
 + (void)dump {
     [self systemInfo];
     
-    NSLog(@"\t%ld\t%ld",
+    if (!hasHeader) {
+        NSLog(@"%s\tCPU usage (%%)\tmemory allocate (kB)", __func__);
+        hasHeader = YES;
+    }
+    
+    NSLog(@"%s\t%ld\t%ld",
+          __func__,
           sysInfo.cpuUsage,
           sysInfo.memoryUsage / 1024);
 }
